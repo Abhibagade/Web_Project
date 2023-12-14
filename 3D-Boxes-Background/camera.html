@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="col">
+        <div class="card bg-body-tertiary">
+            <div class="card-body">
+                <div class="dropzone" id="dropzone-file1">
+                    <button id="captureButton">Capture from Camera</button>
+                    <img id="previewImage" src="" alt="Preview" style="max-width: 100px; max-height: 100px;">
+                </div>
+            </div>
+        </div>
+    </div>    
+    <script>
+        // Get the necessary elements
+const captureButton = document.getElementById("captureButton");
+const previewImage = document.getElementById("previewImage");
+
+// Function to capture image from camera
+captureButton.addEventListener("click", function () {
+    // Use the MediaDevices API to access the camera
+    navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then(function (stream) {
+            // Create a video element to display the camera feed
+            const video = document.createElement("video");
+            video.srcObject = stream;
+            video.play();
+
+            // Add the video element to the dropzone
+            document.getElementById("dropzone-file1").appendChild(video);
+
+            // Add a button to capture the image
+            const captureImageBtn = document.createElement("button");
+            captureImageBtn.textContent = "Capture Image";
+            captureImageBtn.addEventListener("click", function () {
+                const canvas = document.createElement("canvas");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Convert the captured frame to a data URL
+                const capturedImage = new Image();
+                capturedImage.src = canvas.toDataURL("image/jpeg");
+
+                // Display the captured image
+                previewImage.src = capturedImage.src;
+
+                // Stop the camera stream
+                stream.getTracks().forEach(track => track.stop());
+
+                // Remove the video element and capture button
+                video.remove();
+                captureImageBtn.remove();
+            });
+
+            document.getElementById("dropzone-file1").appendChild(captureImageBtn);
+        })
+        .catch(function (error) {
+            console.error("Error accessing camera:", error);
+        });
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        select {
+            width: 200px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <label for="clientName">Client Name:</label>
+            <input type="text" id="clientName" placeholder="Enter client name">
+        </div>
+        
+        <div>
+            <label for="projectList">Project Name:</label>
+            <select id="projectList" multiple>
+                <option value="project1">Project 1</option>
+                <option value="project2">Project 2</option>
+                <option value="project3">Project 3</option>
+                <!-- Add more projects as needed -->
+            </select>
+        </div>
+    </div>
+
+    <button onclick="submitSelection()">Submit</button>
+
+    <script>
+        function submitSelection() {
+            const clientName = document.getElementById('ClientName').value;
+            const selectedProjects = Array.from(document.getElementById('SelectedProjects').selectedOptions).map(option => option.value);
+    
+            // Create a JSON object with clientName and selectedProjects
+            const data = {
+                clientName: clientName,
+                selectedProjects: selectedProjects
+            };
+    
+            // Use fetch to send a POST request to the server
+            fetch('/Home/SubmitSelection', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response from the server
+                console.log(data);
+    
+                // You can perform additional client-side actions here if needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    
+        function GetProjects() {
+            // You can populate the projects dynamically from the server if needed
+            return [
+                new Option("Project 1", "project1"),
+                new Option("Project 2", "project2"),
+                new Option("Project 3", "project3"),
+            ];
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Basic ex of Modal open using dialog -->
+    <!-- <dialog open>
+        <p>Greetings, one and all!</p>
+        <form method="dialog">
+          <button>OK</button>
+        </form>
+    </dialog>   -->
+
+    <dialog>
+        <button autofocus onclick="closeDialogBox()">Close</button>
+        <p>This modal dialog has a groovy backdrop!</p>
+    </dialog>
+    <button onclick="openDialogBox()">Show the dialog</button>   
+    
+    <script>
+        const dialog=document.querySelector('dialog');
+        function openDialogBox(){
+            dialog.showModal();
+        }
+
+        function closeDialogBox(){
+            dialog.close();
+        }
+    </script>
+</body>
+</html>

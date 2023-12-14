@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-Validation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color:aliceblue;">
+    <div class="container">
+        <h1 class="heading">
+            <span class="heading-span-1">Sign</span><span class="heading-span-2">In</span>
+        </h1>
+        <div class="buttons">
+            <button class="signin-btn" id="signin-btn">SignIn</button>
+            <button class="signup-btn" id="singup-btn">SignUp</button>
+        </div>
+        <div>
+            <img src="./Images/background.jpg" style="width: 100px; height: auto;">
+        </div>
+        <div class="form-bg"></div>
+        <form class="form sign-in">
+            <div class="form-input-wrapper">
+                <input type="text" class="form-input" id="userName" placeholder="Your Name..." autocomplete="off"/>
+                <p class="message">Error Message</p>
+            </div>
+            <div class="form-input-wrapper">
+                <img src="./Images/username-removebg-preview.png" class="icon" id="usernameImage"/>
+                <input type="text" class="form-input" id="email" placeholder="Your Email-ID..." autocomplete="off"/>
+                <p class="message">Error Message</p>
+            </div>
+            <div class="form-input-wrapper">
+                <img src="./Images/password-removebg-preview.png" class="icon" id="passwordImage"/>
+                <input type="password" class="form-input" id="password" placeholder="Your Password..." autocomplete="off"/>
+                <p class="message">Error Message</p>
+            </div>
+            <div class="form-input-wrapper">
+                <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm Your Password..." autocomplete="off"/>
+                <p class="message">Error Message</p>
+            </div>
+            <input type="submit" value="Submit" class="form-btn">
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
